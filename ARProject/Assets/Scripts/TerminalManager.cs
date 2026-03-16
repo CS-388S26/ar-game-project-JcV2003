@@ -26,6 +26,7 @@ public class TerminalManager : MonoBehaviour
     public void TargetCreated(GameObject trgt) {
 
         core = trgt;
+
         for (int i = 0; i < terminals.Count; i++) {
 
             terminals[i].GetComponent<BulletSpawner>().target = core.transform;
