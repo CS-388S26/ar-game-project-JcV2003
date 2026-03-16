@@ -1,12 +1,17 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 using Debug = UnityEngine.Debug;
 
 public class TerminalManager : MonoBehaviour
 {
     List<GameObject> terminals = new List<GameObject>();
+
+    [SerializeField] GameObject core;
 
 
     // Start is called before the first frame update
@@ -18,11 +23,26 @@ public class TerminalManager : MonoBehaviour
 
     }
 
+    public void TargetCreated(GameObject trgt) {
+
+        core = trgt;
+        for (int i = 0; i < terminals.Count; i++) {
+
+            terminals[i].GetComponent<BulletSpawner>().target = core.transform;
+            terminals[i].transform.LookAt(core.transform);
+
+        }
+          
+
+    }
+
     public void TerminalCreated(BulletSpawner t) {
 
         terminals.Add(t.gameObject);
 
-        Debug.Log("Terminal "+ t.gameObject.name + " added");
+        t.target = core.transform;
+
+        //Debug.Log("Terminal "+ t.gameObject.name + " added");
 
 
 
@@ -56,5 +76,14 @@ public class TerminalManager : MonoBehaviour
 
         for (int i = 0; i < 3; i++)
             terminals[i].GetComponent<BulletConfiguration>().selected = false;
+    }
+
+    public void TargetDestroyed()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            terminals[i].GetComponent<BulletSpawner>().target = null;
+
+        }
     }
 }

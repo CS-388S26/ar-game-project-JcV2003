@@ -10,6 +10,8 @@ public class Bullet : MonoBehaviour
 
     public Transform target;
 
+    public float bulletDamage;
+
 
     void Start()
     {
@@ -92,5 +94,13 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Core")
+        {
+            other.gameObject.GetComponent<Core>().ReduceHealth(bulletDamage);
+        }
     }
 }
