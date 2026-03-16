@@ -9,22 +9,64 @@ public class Bullet : MonoBehaviour
     Tween transform_tween;
 
     public Transform target;
-    float arcHeight = 2f;
+
 
     void Start()
     {
 
-        target = GameObject.Find("Target").transform;
+  
+
+    
+    }
+
+    public void SetPath(BulletConfiguration config) {
+
+
+        float arcHeight = config.curveMagnitude;
 
         Vector3 start = transform.position;
         Vector3 end = target.position;
 
         Vector3 direction = (end - start).normalized;
 
+        Vector3 control1 = Vector3.zero;
+        Vector3 control2 = Vector3.zero;
+
+        Vector3 right = Vector3.Cross(Vector3.up, direction).normalized;
+
+        switch (config.mode) { 
+
+            case 0:
+
+                control1 = start + direction * 2 + Vector3.up * arcHeight /*+ Random.insideUnitSphere * 2*/;
+                control2 = end - direction * 2 + Vector3.up * (arcHeight * 0.5f) /*+ Random.insideUnitSphere * 2*/;
+
+                break;
+
+            case 1:
+
+                control1 = start + direction * 2 - Vector3.up * arcHeight /*+ Random.insideUnitSphere * 2*/;
+                control2 = end - direction * 2 - Vector3.up * (arcHeight * 0.5f) /*+ Random.insideUnitSphere * 2*/;
+
+                break;
+            case 2:
+
+                control1 = start + direction * 2 + right * arcHeight /*+ Random.insideUnitSphere * 2*/;
+                control2 = end - direction * 2 + right * (arcHeight * 0.5f) /*+ Random.insideUnitSphere * 2*/;
+
+                break;
+
+            case 3:
+
+                control1 = start + direction * 2 - right * arcHeight /*+ Random.insideUnitSphere * 2*/;
+                control2 = end - direction * 2 - right * (arcHeight * 0.5f) /*+ Random.insideUnitSphere * 2*/;
+
+                break;
 
 
-        Vector3 control1 = start + direction * 2 + Vector3.up * arcHeight + Random.insideUnitSphere * 2;
-        Vector3 control2 = end - direction * 2 + Vector3.up * (arcHeight * 0.5f) + Random.insideUnitSphere * 2;
+        };
+
+
 
         Debug.DrawLine(transform.position, control1, Color.red, 5f);
         Debug.DrawLine(control1, control2, Color.green, 5f);
@@ -42,6 +84,7 @@ public class Bullet : MonoBehaviour
                  .SetEase(Ease.Linear)
                  .SetLookAt(0.01f)
                  .OnComplete(() => Destroy(this.gameObject));
+
     }
 
 
