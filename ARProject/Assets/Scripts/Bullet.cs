@@ -6,7 +6,7 @@ using DG.Tweening;
 
 public class Bullet : MonoBehaviour
 {
-    Tween transform_tween;
+    public Tween transform_tween;
 
     public Transform target;
 
@@ -83,6 +83,7 @@ public class Bullet : MonoBehaviour
         transform_tween = transform.DOPath(path, 2f, PathType.CubicBezier)
                  .SetEase(Ease.Linear)
                  .SetLookAt(0.01f)
+                 .SetLink(gameObject)
                  .OnComplete(() => Destroy(this.gameObject));
 
     }
