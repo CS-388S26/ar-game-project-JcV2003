@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem.HID;
 using static UnityEngine.GraphicsBuffer;
 using Debug = UnityEngine.Debug;
 
@@ -68,20 +69,57 @@ public class TerminalManager : MonoBehaviour
 
         terminals[index].GetComponent<BulletConfiguration>().selected = true;
 
+
         Debug.Log("Terminal " + terminals[index].name + " selected");
 
 
     }
 
-    void DeselectAllTerminals() {
+    public void SelectTerminal(GameObject terminal)
+    {
 
-        for (int i = 0; i < 3; i++)
-            terminals[i].GetComponent<BulletConfiguration>().selected = false;
+        DeselectAllTerminals();
+
+        BulletSpawner spawner;
+        terminal.TryGetComponent<BulletSpawner>(out spawner);
+
+        if (spawner != null)
+        {
+            if (!spawner.selected)
+            {
+                spawner.ActiveUI();
+            }
+
+        }
+
+
+        Debug.Log("Terminal " + terminal.name + " selected");
+
+
     }
+
+    public void DeselectAllTerminals() {
+
+        for (int i = 0; i < 4; i++) {
+
+            BulletSpawner spawner;
+            terminals[i].TryGetComponent<BulletSpawner>(out spawner);
+
+            if (spawner != null)
+            {
+                spawner.DeActiveUI();   
+
+            }
+
+
+        }
+           
+    }
+
 
     public void TargetDestroyed()
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 4; i++)
         {
             terminals[i].GetComponent<BulletSpawner>().target = null;
 

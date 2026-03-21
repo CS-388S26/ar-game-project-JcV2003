@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -14,6 +15,7 @@ public class BulletSpawner : MonoBehaviour
     public UnityEvent OnTerminalCreated;
 
     public bool selected = false;
+
 
 
     float timer = 0f;
@@ -49,6 +51,21 @@ public class BulletSpawner : MonoBehaviour
         }
     }
 
+    public void ActiveUI() {
 
-  
+        selected = true;
+        bulletCongif.ConfigSelected();
+
+    }
+
+    public void DeActiveUI()
+    {
+
+        selected = false;
+        bulletCongif.ConfigDeselected();
+
+    }
+
+
+
 }
