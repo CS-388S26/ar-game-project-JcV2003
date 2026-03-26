@@ -15,9 +15,6 @@ public class Core : MonoBehaviour
 
     public int maxHealth; 
 
-    public UnityEvent OnCoreDestroyed;
-    public UnityEvent OnCoreCreated;
-
     public GameObject gm = null;
     public GameObject PanelHits;
 
@@ -25,11 +22,11 @@ public class Core : MonoBehaviour
     void Start()
     {
        
-        //OnCoreCreated.Invoke();
 
 
     }
 
+    //THIS COMPONENT WORKS WITH ENABLING/DISABLING AS TRACKING GAVE ME INSTANTIATING PROBLEMS
     private void OnEnable()
     {
         gm = GameObject.Find("GameManager");
@@ -38,7 +35,7 @@ public class Core : MonoBehaviour
 
 
     }
-
+    //CORE IS HEALTH DEPENDENT ON HOW MANY TERMINALS ARE ACTIVE WHEN WE TAP
     void CreateHealth(List<GameObject> list) {
 
         for (int i = 0; i < list.Count; i++)
@@ -47,6 +44,7 @@ public class Core : MonoBehaviour
         }
     }
 
+    //UI USE
     public void TerminalsSet(List<GameObject> list)
     {
         CreateHealth(list);
@@ -133,7 +131,6 @@ public class Core : MonoBehaviour
         ResetUIvalues();
 
 
-        OnCoreDestroyed.Invoke();
 
         gm.GetComponent<GameManager>().coreDestroyed();
 
@@ -160,12 +157,6 @@ public class Core : MonoBehaviour
 
     }
 
-    //private void OnDestroy()
-    //{
-    //    OnCoreDestroyed.Invoke();
-
-    //    gm.GetComponent<GameManager>().coreDestroyed();
-    //}
 
 
 }

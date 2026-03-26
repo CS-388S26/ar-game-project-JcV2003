@@ -3,6 +3,8 @@ using UnityEngine;
 public class BillboardY : MonoBehaviour
 {
 
+    //THIS COMPONENT MAKES UI ROTATE TOWARDS THE CAMERA 
+
     [SerializeField] Camera cam;
     void LateUpdate()
     {

@@ -8,6 +8,8 @@ using UnityEngine.InputSystem.HID;
 using static UnityEngine.GraphicsBuffer;
 using Debug = UnityEngine.Debug;
 
+//THIS CLASS MANAGES ALL THE TERMINALS, and tell the Game Manager which terminals are active.
+//Also some functions let the game terminal call this maanger to activate and deactive some/all turrets depending on the game state
 public class TerminalManager : MonoBehaviour
 {
     List<GameObject> terminals = new List<GameObject>();
@@ -18,8 +20,7 @@ public class TerminalManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //for (int i = 0; i < 4; i++)
-        //terminals.Add(transform.GetChild(i).gameObject);
+      
 
 
     }
@@ -96,12 +97,6 @@ public class TerminalManager : MonoBehaviour
 
         terminals.Add(t.gameObject);
 
-        //t.target = core.transform;
-
-        //Debug.Log("Terminal "+ t.gameObject.name + " added");
-
-
-
     }
 
     public void TerminalActive(BulletSpawner t)
@@ -109,23 +104,21 @@ public class TerminalManager : MonoBehaviour
 
         t.target = core.transform;
 
-        //Debug.Log("Terminal "+ t.gameObject.name + " added");
-
-
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Q))
-            SelectTerminal(0);
-        if (Input.GetKey(KeyCode.W))
-            SelectTerminal(1);
-        if (Input.GetKey(KeyCode.E))
-            SelectTerminal(2);
-        if (Input.GetKey(KeyCode.R))
-            SelectTerminal(3);
+        //USED ON OLD PROTOTYPE
+        //if (Input.GetKey(KeyCode.Q))
+        //    SelectTerminal(0);
+        //if (Input.GetKey(KeyCode.W))
+        //    SelectTerminal(1);
+        //if (Input.GetKey(KeyCode.E))
+        //    SelectTerminal(2);
+        //if (Input.GetKey(KeyCode.R))
+        //    SelectTerminal(3);
     }
 
     void SelectTerminal(int index) {

@@ -29,6 +29,8 @@ public class Bullet : MonoBehaviour
         m.material.color = tColor;
     }
 
+    //THIS FUNCTION CREATES A PATH USING DIFFERENT CASE SCENARIOS FOR THE CURVE MADE OF THE BULLET
+    //UPDATE: THis is no longer needed as I couldnt implement the obstacles, but it makes a good visual effect
     public void SetPath(BulletConfiguration config) {
 
 
@@ -48,39 +50,34 @@ public class Bullet : MonoBehaviour
 
             case 0:
 
-                control1 = start + direction * 2 + Vector3.up * arcHeight /*+ Random.insideUnitSphere * 2*/;
-                control2 = end - direction * 2 + Vector3.up * (arcHeight * 0.5f) /*+ Random.insideUnitSphere * 2*/;
+                control1 = start + direction * 2 + Vector3.up * arcHeight + Random.insideUnitSphere * 2;
+                control2 = end - direction * 2 + Vector3.up * (arcHeight * 0.5f) + Random.insideUnitSphere * 2;
 
                 break;
 
             case 1:
 
-                control1 = start + direction * 2 - Vector3.up * arcHeight /*+ Random.insideUnitSphere * 2*/;
-                control2 = end - direction * 2 - Vector3.up * (arcHeight * 0.5f) /*+ Random.insideUnitSphere * 2*/;
+                control1 = start + direction * 2 - Vector3.up * arcHeight + Random.insideUnitSphere * 2;
+                control2 = end - direction * 2 - Vector3.up * (arcHeight * 0.5f) + Random.insideUnitSphere * 2;
 
                 break;
             case 2:
 
-                control1 = start + direction * 2 + right * arcHeight /*+ Random.insideUnitSphere * 2*/;
-                control2 = end - direction * 2 + right * (arcHeight * 0.5f) /*+ Random.insideUnitSphere * 2*/;
+                control1 = start + direction * 2 + right * arcHeight + Random.insideUnitSphere * 2;
+                control2 = end - direction * 2 + right * (arcHeight * 0.5f) + Random.insideUnitSphere * 2;
 
                 break;
 
             case 3:
 
-                control1 = start + direction * 2 - right * arcHeight /*+ Random.insideUnitSphere * 2*/;
-                control2 = end - direction * 2 - right * (arcHeight * 0.5f) /*+ Random.insideUnitSphere * 2*/;
+                control1 = start + direction * 2 - right * arcHeight + Random.insideUnitSphere * 2;
+                control2 = end - direction * 2 - right * (arcHeight * 0.5f) + Random.insideUnitSphere * 2;
 
                 break;
 
 
         };
 
-
-
-        Debug.DrawLine(transform.position, control1, Color.red, 5f);
-        Debug.DrawLine(control1, control2, Color.green, 5f);
-        Debug.DrawLine(control2, target.position, Color.blue, 5f);
 
         Vector3[] path = new Vector3[]
         {

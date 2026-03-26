@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
         OncoreJustPlaced.Invoke();
     }
 
+    //This function is called whenever the core is destrouyed, reset the values, terminal and target trackers
     public void coreDestroyed()
     {
 
@@ -68,6 +69,7 @@ public class GameManager : MonoBehaviour
 
     }
 
+    //This function is the same as above  but resets manually the UIs, and is used for resetting manually the game
     public void ResetRound()
     {
 
@@ -91,7 +93,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-
+    //THESE FUNCTIONS ARE FOR HANDLING SPACIAL TOUCH----------------------------------------------------------------------------------------
     void OnEnable()
     {
         LeanTouch.OnFingerTap += HandleTap;
@@ -140,6 +142,7 @@ public class GameManager : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(finger.ScreenPosition);
 
 
+        //FIRST CHECK CHECKS CORE SET UP
         if (!coreReady) {
 
             if (coreOnSight)
@@ -162,6 +165,9 @@ public class GameManager : MonoBehaviour
                 return;
             }
         }
+
+
+        //SECOND CHECK CHECKS TERMNINAL SET UP
 
         if (!terminalsReady) {
 
@@ -188,11 +194,15 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        //GAME CAN START IF PREVIOUS DONE CHECK CHECKS TERMNINAL SET UP
+
         if (coreReady && terminalsReady) {
 
 
             startButton.gameObject.SetActive(true);
         }
+
+        //IF WE START THE ROUND WE CANNOT MODIFY THE TERMINALS
 
         if (roundStarted) return;
 
@@ -219,15 +229,17 @@ public class GameManager : MonoBehaviour
        
 
     }
+    //---------------------------------------------------------------------------------------------------------------------------------------------
 
 
-
-    // Update is called once per frame
+   // Update is called once per frame
     void Update()
     {
 
+        
         if (roundStarted) startButton.gameObject.SetActive(false);
 
+        //DELAY FOR NEXT ROUND
         if (nextRound) {
 
             timer += Time.deltaTime;
@@ -252,6 +264,7 @@ public class GameManager : MonoBehaviour
 
         }
 
+        //DELAY FOR HARD-RESET
         if (roundStarted) {
 
             resetTime += Time.deltaTime;
@@ -266,8 +279,5 @@ public class GameManager : MonoBehaviour
     
     }
 
-    public void Message(string n) { 
-    
-        Debug.Log(n);
-    }
+
 }

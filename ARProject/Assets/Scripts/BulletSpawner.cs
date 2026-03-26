@@ -26,7 +26,7 @@ public class BulletSpawner : MonoBehaviour
 
     float timer = 0f;
     // Start is called before the first frame update
-    void Start()
+   void Start()
     {
 
 
@@ -42,6 +42,7 @@ public class BulletSpawner : MonoBehaviour
 
 
     // Update is called once per frame
+    //MAINLY ACT AS A BULLET SPAWNER SHOOTER
     void Update()
     {
 
@@ -56,6 +57,9 @@ public class BulletSpawner : MonoBehaviour
                 b.GetComponent<Bullet>().target = target;
                 b.GetComponent<Bullet>().SetPath(bulletCongif);
                 b.GetComponent<Bullet>().SetColor(tColor);
+                b.GetComponent<TrailRenderer>().startColor=tColor;
+                b.GetComponent<TrailRenderer>().endColor=tColor;
+
 
                 bulletsShoot++;
             }

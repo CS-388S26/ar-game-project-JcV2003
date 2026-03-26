@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-
+//THIS CLASS IS USED FOR CONFIGURATE THE NUMBER OF BULLETS, its connected to the UI EVENTS 
 public class BulletConfiguration : MonoBehaviour
 {
 
@@ -27,17 +27,17 @@ public class BulletConfiguration : MonoBehaviour
     void Update()
     {
 
-        if (!selected) return;
+        //if (!selected) return;
 
       
-        if (Input.GetKey(KeyCode.Alpha0))
-            mode=0;
-        if (Input.GetKey(KeyCode.Alpha1))
-            mode=1;
-        if (Input.GetKey(KeyCode.Alpha2))
-            mode=2;
-        if (Input.GetKey(KeyCode.Alpha3))
-            mode=3;
+        //if (Input.GetKey(KeyCode.Alpha0))
+        //    mode=0;
+        //if (Input.GetKey(KeyCode.Alpha1))
+        //    mode=1;
+        //if (Input.GetKey(KeyCode.Alpha2))
+        //    mode=2;
+        //if (Input.GetKey(KeyCode.Alpha3))
+        //    mode=3;
 
     }
 
@@ -90,10 +90,6 @@ public class BulletConfiguration : MonoBehaviour
         mode = UIInfo.GetComponent<UI_infoTerminal>().modeDropdown.value;
 
     }
-
-
-
-
 
 
 }
