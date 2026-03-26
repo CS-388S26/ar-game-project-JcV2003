@@ -12,13 +12,21 @@ public class Bullet : MonoBehaviour
 
     public float bulletDamage;
 
+    public MeshRenderer m;
+
 
     void Start()
     {
 
-  
 
-    
+        m = transform.Find("Mesh").GetComponent<MeshRenderer>();
+
+
+    }
+
+    public void SetColor( Color tColor) { 
+        
+        m.material.color = tColor;
     }
 
     public void SetPath(BulletConfiguration config) {
@@ -100,7 +108,7 @@ public class Bullet : MonoBehaviour
     {
         if (other.tag == "Core")
         {
-            other.gameObject.GetComponent<Core>().ReduceHealth(bulletDamage);
+            other.gameObject.GetComponent<Core>().ReduceHealth(1,this);
         }
     }
 }

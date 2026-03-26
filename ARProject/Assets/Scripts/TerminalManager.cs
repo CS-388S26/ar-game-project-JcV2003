@@ -24,23 +24,88 @@ public class TerminalManager : MonoBehaviour
 
     }
 
-    public void TargetCreated(GameObject trgt) {
+    public void TargetCreated() {
 
-        core = trgt;
 
-        for (int i = 0; i < terminals.Count; i++) {
+        core = GameObject.Find("Core");
 
-            terminals[i].GetComponent<BulletSpawner>().target = core.transform;
-            terminals[i].transform.LookAt(core.transform);
+    }
+
+    public int TerminalsActive()
+    {
+        int activeT = 0;
+
+        for (int i = 0; i < terminals.Count; i++)
+        {
+            if (terminals[i].activeInHierarchy) activeT++;
 
         }
-          
+
+        return activeT;
+    }
+
+    public List<GameObject> TerminalsActiveList()
+    {
+        List<GameObject> activeT = new List<GameObject>();
+
+        for (int i = 0; i < terminals.Count; i++)
+        {
+            if (terminals[i].activeInHierarchy) activeT.Add(terminals[i]);
+
+        }
+
+        return activeT;
+    }
+
+    public void DeactivateTerminals()
+    {
+
+        for (int i = 0; i < terminals.Count; i++)
+        {
+            if (terminals[i].activeInHierarchy) {
+                terminals[i].SetActive(false);
+            
+            } 
+        }
+    
+    }
+
+    public void TerminalsStart()
+    {
+
+        for (int i = 0; i < terminals.Count; i++)
+        {
+            terminals[i].GetComponent<BulletSpawner>().shoot = true;
+
+        }
+
+    }
+
+    public void TerminalsStop()
+    {
+
+        for (int i = 0; i < terminals.Count; i++)
+        {
+            terminals[i].GetComponent<BulletSpawner>().shoot = false;
+
+        }
 
     }
 
     public void TerminalCreated(BulletSpawner t) {
 
         terminals.Add(t.gameObject);
+
+        //t.target = core.transform;
+
+        //Debug.Log("Terminal "+ t.gameObject.name + " added");
+
+
+
+    }
+
+    public void TerminalActive(BulletSpawner t)
+    {
 
         t.target = core.transform;
 
@@ -100,7 +165,7 @@ public class TerminalManager : MonoBehaviour
 
     public void DeselectAllTerminals() {
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < terminals.Count; i++) {
 
             BulletSpawner spawner;
             terminals[i].TryGetComponent<BulletSpawner>(out spawner);

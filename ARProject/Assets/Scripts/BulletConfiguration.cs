@@ -12,6 +12,9 @@ public class BulletConfiguration : MonoBehaviour
 
     public bool selected = false;
 
+
+    public int bulletstoBeShoot = 0;
+
     GameObject UIInfo;
 
     // Start is called before the first frame update
@@ -66,6 +69,22 @@ public class BulletConfiguration : MonoBehaviour
 
         UIInfo.GetComponent<UI_infoTerminal>().SetInformation(this);
     }
+
+    public void IncreaseBullets()
+    {
+        bulletstoBeShoot++;
+
+        UIInfo.GetComponent<UI_infoTerminal>().SetInformation(this);
+    }
+    public void ReduceBullets()
+    {
+        bulletstoBeShoot--;
+
+        if (bulletstoBeShoot < 0) bulletstoBeShoot = 0;
+
+        UIInfo.GetComponent<UI_infoTerminal>().SetInformation(this);
+    }
+
     public void ShootModeChange() {
 
         mode = UIInfo.GetComponent<UI_infoTerminal>().modeDropdown.value;

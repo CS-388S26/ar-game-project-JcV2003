@@ -5,14 +5,19 @@ using UnityEngine;
 
 public class UI_infoTerminal : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI modeSelected;
+    //[SerializeField] TextMeshProUGUI modeSelected;
     [SerializeField] TextMeshProUGUI arcWeight;
     [SerializeField] public TMP_Dropdown modeDropdown;
 
+    [SerializeField] TextMeshProUGUI bulletNumber;
+
+
     public void SetInformation(BulletConfiguration bc) {
 
-        modeSelected.text = bc.mode.ToString();
+        //modeSelected.text = bc.mode.ToString();
         arcWeight.text = bc.curveMagnitude.ToString();
+
+        bulletNumber.text = bc.bulletstoBeShoot.ToString();
 
 
     }

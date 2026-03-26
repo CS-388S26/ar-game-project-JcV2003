@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig>
+  <Tracking>
+    <ImageTarget name="turret4" size="0.200000 0.200000" />
+    <ImageTarget name="turret3" size="0.200000 0.186275" />
+    <ImageTarget name="turret2" size="0.200000 0.200000" />
+    <ImageTarget name="turret1" size="0.200000 0.200000" />
+    <CylinderTarget name="targetC2" sideLength="0.122000"/>
+  </Tracking>
+</QCARConfig>

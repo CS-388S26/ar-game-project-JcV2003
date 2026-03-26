@@ -13,8 +13,14 @@ public class BulletSpawner : MonoBehaviour
     public Transform target;
 
     public UnityEvent OnTerminalCreated;
+    public UnityEvent OnTerminalActive;
+
+    public Color tColor;
 
     public bool selected = false;
+    public bool shoot = false;
+
+    int bulletsShoot = 0;
 
 
 
@@ -23,9 +29,14 @@ public class BulletSpawner : MonoBehaviour
     void Start()
     {
 
+
         OnTerminalCreated.Invoke();
 
+    }
 
+    private void OnEnable()
+    {
+        OnTerminalActive.Invoke();
     }
 
 
@@ -39,11 +50,14 @@ public class BulletSpawner : MonoBehaviour
 
         if (timer > 1f)
         {
-            if (target) {
+            if (shoot && target && bulletsShoot < bulletCongif.bulletstoBeShoot) {
                 GameObject b = Instantiate(bullet, transform);
 
                 b.GetComponent<Bullet>().target = target;
                 b.GetComponent<Bullet>().SetPath(bulletCongif);
+                b.GetComponent<Bullet>().SetColor(tColor);
+
+                bulletsShoot++;
             }
          
 
@@ -51,6 +65,11 @@ public class BulletSpawner : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        bulletsShoot = 0;
+
+    }
     public void ActiveUI() {
 
         selected = true;
